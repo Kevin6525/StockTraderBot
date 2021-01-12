@@ -1,4 +1,4 @@
-# DayTraderBot
+# StockTraderBot
 In Progress
 Note: Uploaded code is not complete but should be in a few days
 Currently finished:
