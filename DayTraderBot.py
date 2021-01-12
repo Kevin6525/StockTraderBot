@@ -10,6 +10,8 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 
 totalInvest = 1000.00
+# Pick the 5 stocks to buy in today
+# Allocate 200 dollars to each stock to trade with
 def getTickers():
     driver = webdriver.Chrome()
     driver.get('https://finance.yahoo.com/most-active')
@@ -26,17 +28,15 @@ def getTickers():
     driver.quit()
     return[ticker1,ticker2,ticker3,ticker4,ticker5]
 #def executeBuy():
-#    Bought : {
-#        "close" :
-#        "high" :
-
-#
-#
-#    Need to pass in price, shares and time. Decrement total
-#    return str(time) + " Bought " + str(shares) + " shares at " + str(price)
+#   decrement total, save current price and date/time of purchase add data to dict
 #def executeSell():
-#    return str(time_ + " Sold " + str(shares) + "shares at " + str(price)
+#   add difference of buy and sell to a new value called todaysProfits and push the date/time/sale price and number of shares sold and the initial buy price into a dict
+#   Remove the dict with the corresponding ticker key from the buy dict
 #def printSummary():
+#   Output the buy dict at end of day (should be empty)
+#   Output the sell dict at the end of day (should not be empty)
+#   Output total profits: todaysProfits
+#   
 def getHistory(tickers):
     for i in range(len(tickers)):
         stockinfo = yf.download(tickers[i], start='2017-01-01', end='2020-12-31')
@@ -64,12 +64,16 @@ def getHistory(tickers):
         plt.legend(loc='upper left')
     plt.show()
 # Use dual moving average crossover to determine when to buy/sell stock
+# Run this every minute until market closes
+# Print output summary
 def mainRun(tickers):
+    #iterate through all the tickers and get their current price
     for ticker in tickers:
         driver = webdriver.Chrome()
         driver.get('https://finance.yahoo.com/quote/' + ticker)
         soup = BeautifulSoup(driver.page_source, 'lxml')
         currentPrice = soup.find(id="quote-market-notice").find_parent().find("span").text
-
+        #if the current price fits our algorithm to buy && our total is > 0 then trigger buy for 200 dollars in fractional shares
+        #if the current price fits out algorithm to sell && our buy dict has the ticker inside then sell the shares
 tickers = getTickers()
 getHistory(tickers)
