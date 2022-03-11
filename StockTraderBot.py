@@ -71,7 +71,8 @@ def getHistory(tickers, dict):
         plt.xlabel(str(begin) + " - " + str(finish))
         plt.ylabel('Price (in USD)')
         plt.legend(loc='upper left')
-    #plt.show() if want to see the graphs (program is stopped until the graphs are closed)
+    # Uncomment to show the graphs (Program stops until graphs are closed)
+    #plt.show()
 # Use Bollinger Bands to determine when to buy/sell
 # We only invest 200 at a time out of the 1000 and will look through 5 stocks every minute
 # If we already bought a stock we will hold onto that stock until it is sold instead of
@@ -103,6 +104,7 @@ def createDict(tickers):
     return dict
 
 #Call the getTickers() function if we don't know what tickers to use
+#tickers = getTickers()
 tickers = ['TSLA', 'XLF', 'QQQ', 'SPY', 'VXX']
 #In future calls we reference our past days stocks buys/sells
 if not path.exists('stocksDictionary.txt'):
