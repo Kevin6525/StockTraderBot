@@ -36,7 +36,7 @@ def executeBuy(ticker, totalInvest, dict, currentPrice):
     dict[ticker]['totalShares'] = '{:.2f}'.format(float(200/currentPrice))
 # Execute a 'sell' update and store the date accordingly
 def executeSell(ticker, totalProfit, dict, currentPrice):
-    totalProfit += (currentPrice - dict[ticker]['buyPrice'])
+    totalProfit += (currentPrice - dict[ticker]['buyPrice']) * dict[ticker]['totalShares']
     dict[ticker]['sellPrice'] = currentPrice
     dict[ticker]['sellTime'] = datetime.now()
     dict[ticker]['totalShares'] = 0
